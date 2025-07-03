@@ -66,37 +66,6 @@
     .btn:hover {
       background-color: #218838;
     }
-    .ad-wrapper {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      margin: 40px 0;
-    }
-    .ad-box {
-      background: #f2f2f2;
-      padding: 10px;
-      border-radius: 8px;
-      text-align: center;
-      min-height: 100px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .ad-placeholder {
-      color: #666;
-      font-style: italic;
-    }
-    .ad-loading {
-      color: #999;
-    }
-    .error-message {
-      color: #dc3545;
-      background: #f8d7da;
-      padding: 15px;
-      border-radius: 8px;
-      margin: 20px 0;
-      display: none;
-    }
     @media (max-width: 768px) {
       .container {
         padding: 20px;
@@ -110,8 +79,6 @@
 <body>
   <div class="container">
     <img class="featured-img" src="https://cdn.kinocheck.com/i/w=480/7sr0bzhgkh.jpg" alt="A Sloth Story Poster" onerror="this.src='https://via.placeholder.com/960x480?text=A+Sloth+Story+Poster'">
-    
-    <div class="error-message" id="ad-error"></div>
     
     <h1>Watch A Sloth Story (2025) – Now in 3D & 4K</h1>
     <p><strong>A Sloth Story</strong> is a beautifully animated film directed by Ricard Cussó featuring the voices of Leslie Jones, Remy Hii, and Teo Vergara. Follow Laura, a swift sloth, and her lovable family on a journey from rainforest devastation to food truck triumphs in the big city.</p>
@@ -133,119 +100,5 @@
     <h2>Movie Recap</h2>
     <p>After a wild storm destroys their jungle home, Laura and her family head to the city to rebuild their food truck dreams. With secret recipes and unstoppable heart, the sloths race against time (in their own slow way!) to show the world what family and flavor really mean.</p>
 
-    <h2>Premium Ad-Supported Viewing</h2>
-    <div class="ad-wrapper" id="ad-container">
-      <!-- Ads will be loaded here dynamically -->
-    </div>
-
     <h2>Final Verdict</h2>
-    <p><em>A Sloth Story</em> is not just about slow-moving creatures — it's a bold, brilliant, and funny tale of resilience and the bonds that make a family. Ready to smile, laugh, and maybe shed a happy tear? Watch it now in glorious 3D or download it in full 4K resolution.</p>
-
-    <div class="btn-group">
-      <a class="btn" href="https://www.profitableratecpm.com/yq9jnyr0ff?key=12adf136413cbe6ab5c18c69bbee6bd1" target="_blank" rel="noopener noreferrer">▶ Stream Now</a>
-      <a class="btn" href="https://www.profitableratecpm.com/mxetifxvx9?key=e2a66cbea544046289785ff55f8f10cb" target="_blank" rel="noopener noreferrer">⬇ Download 4K</a>
-    </div>
-  </div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const adContainer = document.getElementById('ad-container');
-      const errorElement = document.getElementById('ad-error');
-      const totalAds = 6; // Reduced from 15 for better performance
-      let loadedAds = 0;
-      let hasError = false;
-
-      // Function to create ad blocks
-      function createAdBlocks() {
-        for (let i = 0; i < totalAds; i++) {
-          const adBox = document.createElement('div');
-          adBox.className = "ad-box";
-          adBox.innerHTML = `<div class="ad-loading">Loading advertisement...</div>`;
-          adContainer.appendChild(adBox);
-          
-          // Load different ad types based on position
-          if (i % 3 === 0) {
-            loadBannerAd(adBox, i);
-          } else {
-            loadIframeAd(adBox, i);
-          }
-        }
-      }
-
-      // Function to load banner ads
-      function loadBannerAd(container, index) {
-        try {
-          const script = document.createElement('script');
-          script.src = `//pl27068397.profitableratecpm.com/3b3f7cd72ae20e611231fd22b3c48d64/invoke.js?cb=${Date.now() + index}`;
-          script.async = true;
-          script.onload = function() {
-            loadedAds++;
-            checkAdLoading();
-          };
-          script.onerror = function() {
-            showAdError(container, "Banner ad failed to load");
-          };
-          container.appendChild(script);
-        } catch (e) {
-          showAdError(container, "Error loading banner ad");
-        }
-      }
-
-      // Function to load iframe ads
-      function loadIframeAd(container, index) {
-        try {
-          const iframe = document.createElement('iframe');
-          iframe.src = `//www.highperformanceformat.com/edd3b717926c1d82ce06ae6fa884bc76/invoke.js?cb=${Date.now() + index}`;
-          iframe.width = "320";
-          iframe.height = "50";
-          iframe.style.border = "none";
-          iframe.style.overflow = "hidden";
-          iframe.onload = function() {
-            loadedAds++;
-            checkAdLoading();
-          };
-          iframe.onerror = function() {
-            showAdError(container, "Iframe ad failed to load");
-          };
-          container.innerHTML = '';
-          container.appendChild(iframe);
-        } catch (e) {
-          showAdError(container, "Error loading iframe ad");
-        }
-      }
-
-      // Show error message for individual ad
-      function showAdError(container, message) {
-        hasError = true;
-        container.innerHTML = `<div class="ad-placeholder">${message}</div>`;
-        errorElement.textContent = "Some advertisements failed to load. Please refresh the page or check your ad blocker settings.";
-        errorElement.style.display = 'block';
-        loadedAds++;
-        checkAdLoading();
-      }
-
-      // Check if all ads are loaded
-      function checkAdLoading() {
-        if (loadedAds >= totalAds) {
-          if (hasError) {
-            console.warn(`${totalAds - loadedAds} ads failed to load`);
-          } else {
-            console.log('All ads loaded successfully');
-          }
-        }
-      }
-
-      // Initialize ad loading
-      createAdBlocks();
-
-      // Fallback if no ads load after 5 seconds
-      setTimeout(function() {
-        if (loadedAds === 0) {
-          errorElement.textContent = "Advertisements failed to load. Please check your internet connection or ad blocker settings.";
-          errorElement.style.display = 'block';
-        }
-      }, 5000);
-    });
-  </script>
-</body>
-</html>
+    <p><em>A Sloth Story</em> is not just about slow-moving creatures — it's a bold, brilliant, and funny tale of resilience and the bonds that make a family. Ready 
